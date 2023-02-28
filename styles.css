@@ -1,0 +1,152 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+  
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+}
+
+header,
+main,
+footer {
+  max-width: 1140px;
+  min-width: 960px;
+  
+}
+
+header {
+  background-color: #92DEA3;
+  padding: 16px;
+}
+
+main {
+  background-color: #FF4500;
+  padding: 16px;
+}
+
+footer {
+  background-color: #908FFA;
+  padding: 16px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+::marker {
+  color: white;
+}
+
+/* -------------------------------------- */
+
+body.lock {
+  overflow: hidden;
+}
+
+:root {
+  --menu-left: 300px;
+  --menu-height: 0;
+  --menu-left-width: 0;
+}
+
+/* --- Animation styles START */
+
+[aria-expanded='true'] ~ .menu--scrollbar {
+  display: block;
+}
+
+.menu[aria-expanded=true] .menu__transition {
+  transform: translate(var(--menu-left), 0);
+  opacity: 1;
+}
+
+/* --- Animation styles END */
+
+.menu {
+  display: none;
+  position: fixed;
+  background-color: transparent;
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.menu--scrollbar {
+  overflow-y: auto;
+}
+
+.menu__transition {
+  --menu-transition-color: #1F1BC2;
+  background-color: var(--menu-transition-color);
+  max-width: 400px;
+
+  transform: translate(calc(var(--menu-left) * -1), 0);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in;
+  transition-delay: .1s;
+  padding-block: 8px;
+  position: sticky
+}
+
+.menu__transition:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: var(--menu-transition-color);
+  top: 0;
+  left: calc(var(--menu-left) * -1);
+  width: var(--menu-left);
+  height: var(--menu-height);
+}
+
+/* Scenario */
+
+.close {
+  float: right;
+  margin: 0 8px;
+}
+
+.lots-of-content {
+  min-height: 2000px;
+  background-color: orangered;
+}
+
+/* Checkmark */
+:root {
+  --check-color-bg: #61d345;
+  --check-color-fg: #ffffff;
+}
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--check-color-bg);
+  position: relative;
+  transform: rotate(45deg);
+}
+.checkmark::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-color: var(--check-color-fg);
+  bottom: 6px;
+  left: 6px;
+  height: 10px;
+  width: 6px;
+}
